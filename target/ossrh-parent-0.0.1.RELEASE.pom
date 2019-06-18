@@ -4,10 +4,10 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.xyy</groupId>
+    <groupId>com.xyy.athena</groupId>
     <artifactId>ossrh-parent</artifactId>
     <packaging>pom</packaging>
-    <version>0.0.1</version>
+    <version>0.0.1.RELEASE</version>
     <name>ossrh-parent</name>
     <url>https://github.com/xiongyayun428/ossrh-parent</url>
     <description>
@@ -16,9 +16,9 @@
     <properties>
         <java.version>1.8</java.version>
         <maven.compiler.plugin.version>3.8.1</maven.compiler.plugin.version>
-        <maven.source.plugin.version>3.1.0</maven.source.plugin.version>
-        <maven.javadoc.plugin.version>3.1.0</maven.javadoc.plugin.version>
+        <maven.source.plugin.version>3.0.1</maven.source.plugin.version>
         <maven.gpg.plugin.version>1.6</maven.gpg.plugin.version>
+        <maven.javadoc.plugin.version>2.10.4</maven.javadoc.plugin.version>
     </properties>
     <developers>
         <developer>
