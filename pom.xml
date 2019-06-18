@@ -5,11 +5,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.xyy</groupId>
-    <artifactId>ossrh-parent</artifactId>
+    <artifactId>oss-parent</artifactId>
     <packaging>pom</packaging>
     <version>0.0.1</version>
-    <name>ossrh-parent</name>
-    <url>https://github.com/xiongyayun428/ossrh-parent</url>
+    <name>oss-parent</name>
+    <url>https://github.com/xiongyayun428/oss-parent</url>
     <description>
         用于发布到maven center的parent配置
     </description>
@@ -29,9 +29,9 @@
         </developer>
     </developers>
     <scm>
-        <connection>scm:git:https://github.com/xiongyayun428/ossrh-parent.git</connection>
-        <developerConnection>scm:git:https://github.com/xiongyayun428/ossrh-parent.git</developerConnection>
-        <url>https://github.com/xiongyayun428/ossrh-parent</url>
+        <connection>scm:git:https://github.com/xiongyayun428/oss-parent.git</connection>
+        <developerConnection>scm:git:https://github.com/xiongyayun428/oss-parent.git</developerConnection>
+        <url>https://github.com/xiongyayun428/oss-parent</url>
         <tag>HEAD</tag>
     </scm>
     <licenses>
