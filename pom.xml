@@ -6,12 +6,11 @@
     <groupId>com.xiongyayun</groupId>
     <artifactId>oss-parent</artifactId>
     <packaging>pom</packaging>
-    <version>0.0.4</version>
+    <version>0.0.5</version>
     <name>oss-parent</name>
     <url>https://github.com/xiongyayun428/oss-parent</url>
-    <description>
-        the parent configuration for publishing to maven center
-    </description>
+    <description>the parent configuration for publishing to maven center</description>
+
     <properties>
         <java.version>1.8</java.version>
         <maven.compiler.source>${java.version}</maven.compiler.source>
@@ -21,11 +20,14 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
+        <maven-jar-plugin.version>3.2.0</maven-jar-plugin.version>
         <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
         <maven-source-plugin.version>3.2.1</maven-source-plugin.version>
         <maven-javadoc-plugin.version>3.3.1</maven-javadoc-plugin.version>
+        <flatten-maven-plugin.version>1.2.7</flatten-maven-plugin.version>
         <maven-gpg-plugin.version>3.0.1</maven-gpg-plugin.version>
     </properties>
+
     <developers>
         <developer>
             <name>Yayun.Xiong</name>
@@ -50,7 +52,7 @@
     <build>
         <pluginManagement>
             <plugins>
-                <!--jdk version-->
+                <!-- Compiler -->
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-compiler-plugin</artifactId>
@@ -58,6 +60,25 @@
                     <configuration>
                         <source>${java.version}</source>
                         <target>${java.version}</target>
+                    </configuration>
+                </plugin>
+                <!-- 打包 -->
+                <plugin>
+                    <artifactId>maven-jar-plugin</artifactId>
+                    <version>${maven-jar-plugin.version}</version>
+                    <configuration>
+                        <archive>
+                            <manifest>
+                                <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+                                <addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
+                                <addBuildEnvironmentEntries>true</addBuildEnvironmentEntries>
+                            </manifest>
+                            <manifestEntries>
+                                <Implementation-Description>${project.description}</Implementation-Description>
+                                <Built-By>Yayun.Xiong</Built-By>
+                                <Email>xiongyayun428@163.com</Email>
+                            </manifestEntries>
+                        </archive>
                     </configuration>
                 </plugin>
                 <!-- Source -->
@@ -101,6 +122,33 @@
                         </execution>
                     </executions>
                 </plugin>
+                <!-- 添加flatten-maven-plugin用于替换${revision} -->
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>flatten-maven-plugin</artifactId>
+                    <version>${flatten-maven-plugin.version}</version>
+                    <configuration>
+                        <!-- 是否更新pom文件 -->
+                        <updatePomFile>true</updatePomFile>
+                        <flattenMode>resolveCiFriendliesOnly</flattenMode>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <id>flatten</id>
+                            <phase>process-resources</phase>
+                            <goals>
+                                <goal>flatten</goal>
+                            </goals>
+                        </execution>
+                        <execution>
+                            <id>flatten.clean</id>
+                            <phase>clean</phase>
+                            <goals>
+                                <goal>clean</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
                 <!-- Gpg Signature -->
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
@@ -137,29 +185,35 @@
             </distributionManagement>
             <build>
                 <plugins>
-                    <!--jdk version-->
+                    <!-- Compiler -->
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-compiler-plugin</artifactId>
-                        <version>${maven-compiler-plugin.version}</version>
+                    </plugin>
+                    <!-- 打包 -->
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-jar-plugin</artifactId>
                     </plugin>
                     <!-- Source -->
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-source-plugin</artifactId>
-                        <version>${maven-source-plugin.version}</version>
                     </plugin>
                     <!-- Javadoc -->
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-javadoc-plugin</artifactId>
-                        <version>${maven-javadoc-plugin.version}</version>
                     </plugin>
                     <!-- Gpg Signature -->
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-gpg-plugin</artifactId>
-                        <version>${maven-gpg-plugin.version}</version>
+                    </plugin>
+                    <!-- 添加flatten-maven-plugin用于替换${revision} -->
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>flatten-maven-plugin</artifactId>
                     </plugin>
                 </plugins>
             </build>
